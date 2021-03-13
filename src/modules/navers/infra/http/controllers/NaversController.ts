@@ -12,7 +12,11 @@ export default class NaversController{
         })
         return response.json(naver);
     }
-
+    public async showName(request: Request, response: Response): Promise<Response>{
+        const {name} = request.query;
+        const naver = await createNaver.executeShowName({name: name})
+        return response.json(naver);
+    }
     public async show(request: Request, response: Response): Promise<Response>{
         const {id} = request.params;
         const naver = await createNaver.executeShow({id})
@@ -35,11 +39,6 @@ export default class NaversController{
     public async delete(request: Request, response: Response){
         const {id} = request.params;
         const naver = await createNaver.executeDelete({id})
-        return response.json(naver);
-    }
-    public async showName(request: Request, response: Response): Promise<Response>{
-        const {name} = request.query;
-        const naver = await createNaver.executeShowName({name: name})
         return response.json(naver);
     }
     public async showJob(request: Request, response: Response): Promise<Response>{

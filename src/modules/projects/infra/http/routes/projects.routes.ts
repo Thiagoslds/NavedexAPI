@@ -7,8 +7,8 @@ const projectsRouter = Router();
 
 projectsRouter.use(ensureAuthenticated);
 projectsRouter.post('/store', projectsController.create);
+projectsRouter.get('/show/name', projectsController.findByName);
 projectsRouter.get('/show/:id', projectsController.show);
-projectsRouter.get('/showname', projectsController.findByName);
 projectsRouter.get('/index', projectsController.index);
 projectsRouter.post('/update/:id', projectsController.update);
 projectsRouter.get('/delete/:id', projectsController.delete);
