@@ -1,4 +1,4 @@
-import { Router, request, response } from 'express';
+import { Router } from 'express';
 import ensureAuthenticated from '../../../../users/infra/middlewares/ensureAuthenticated';
 import NaversController from '../controllers/NaversController'
 

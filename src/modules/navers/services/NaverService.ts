@@ -36,8 +36,7 @@ interface RequestShow{
 
 export default class NaverService{
 
-    public async execute({name, birthdate, admission_date, 
-        job_role, projects}: Request): Promise<Naver>{
+    public async execute({name, birthdate, admission_date, job_role, projects}: Request): Promise<Naver>{
         let arrBirthdate = birthdate.split('-');
         const birthdateInDate = new Date(
             Number(arrBirthdate[0]), Number(arrBirthdate[1])-1, Number(arrBirthdate[2])
@@ -48,20 +47,22 @@ export default class NaverService{
         ); 
         const naver = naversRepository.createNaver({
             name, birthdateInDate, admission_dateInDate, job_role, projects
-        })
+        });
+
         return naver;
     }
     public async executeShow({id}: RequestID): Promise<RequestShow>{
         const naver = await naversRepository.showNaver({id});
         const allProjects = await projectService.executeIndex();
         let projectNaver = [];
+
         allProjects.forEach(project => {
             naver.projects.forEach(id => {
                 if (id.toString() == project.id)
                     projectNaver.push ({id: project.id, name: project.name})
             })
         })
-        let arrBirthdate = []
+        let arrBirthdate = [];
         arrBirthdate.push(
             naver.birthdate.getFullYear(), 
             naver.birthdate.getMonth()+1, 
@@ -80,12 +81,14 @@ export default class NaverService{
             admission_date: arrAdmissionDate.join('-'),
             job_role: naver.job_role,
             projects: projectNaver //project.index
-        }
+        };
+
         return showNaver;
     }
     public async executeIndex(): Promise<RequestIndex[]>{
         const naver = await naversRepository.allNavers();
         let indexNaver = [];
+
         naver.forEach(naver => {
             let arrBirthdate = [];
             let arrAdmissionDate = [];
@@ -111,8 +114,7 @@ export default class NaverService{
 
         return indexNaver;
     }
-    public async executeUpdate({id}, {name, birthdate, admission_date, 
-        job_role, projects}: Request): Promise<Request>{
+    public async executeUpdate({id}, {name, birthdate, admission_date, job_role, projects}: Request): Promise<Request>{
 
         let arrBirthdate = birthdate.split('-');
         const birthdateInDate = new Date(
@@ -126,18 +128,21 @@ export default class NaverService{
         ); 
         const naver = naversRepository.updateNaver({id}, {
             name, birthdateInDate, admission_dateInDate, job_role, projects
-        })
+        });
+
         return {
             name, birthdate, admission_date, job_role, projects
         };
     }
     public async executeDelete({id}: RequestID): Promise<{}>{
-        const naver = naversRepository.deleteNaver({id})
+        const naver = naversRepository.deleteNaver({id});
+
         return naver;
     }
     public async executeShowName({name}): Promise<RequestIndex[]>{
         const naver = await naversRepository.findNaverName(name);
         let indexNaver = [];
+
         naver.forEach(naver => {
             let arrBirthdate = [];
             let arrAdmissionDate = [];
@@ -166,6 +171,7 @@ export default class NaverService{
     public async executeShowJob({job_role}): Promise<RequestIndex[]>{
         const naver = await naversRepository.findNaverJob(job_role);
         let indexNaver = [];
+
         naver.forEach(naver => {
             let arrBirthdate = [];
             let arrAdmissionDate = [];
@@ -200,6 +206,7 @@ export default class NaverService{
         )
         const naver = await naversRepository.findNaverDate(admissionDate);
         let indexNaver = [];
+        
         naver.forEach(naver => {
             let arrBirthdate = [];
             let arrAdmissionDate = [];

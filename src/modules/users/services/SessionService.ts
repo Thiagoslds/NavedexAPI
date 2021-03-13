@@ -17,9 +17,7 @@ interface Response{
 
 class SessionService{   
     public async execute({email, password}: Request): Promise<Response>{
-        console.log(email, password)
         const user = await usersRepository.findUser(email);
-        console.log(user.email, user.password)
         if(!user){
             throw new Error('Senha ou email incorretos');
         }

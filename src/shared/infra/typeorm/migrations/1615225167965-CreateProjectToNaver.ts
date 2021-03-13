@@ -1,5 +1,6 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
+//Tabela para relacionamento many to many entre projects e navers
 export class CreateProjectToNaver1615225167965 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {

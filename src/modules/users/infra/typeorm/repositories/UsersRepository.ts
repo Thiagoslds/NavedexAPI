@@ -6,6 +6,7 @@ interface Request{
     password: string
 }
 
+//Decorator, criando uma classe mapeando o DB.
 @EntityRepository(User)
 
 export default class UsersRepository extends Repository<User>{

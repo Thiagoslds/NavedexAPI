@@ -15,12 +15,14 @@ interface RequestID{
     id: string
 }
 
+//Mostrar todos os projetos
 export default class ProjectShowService{
 
     public async executeShow({id}: RequestID): Promise<RequestShow>{
         const project = await projectsRepository.showProject({id})
         const allNavers = await naverService.executeIndex();
         let projectNaver = [];
+
         allNavers.forEach(naver => {
             project.navers.forEach(id => {
                 if (id.toString() == naver.id)
@@ -39,6 +41,7 @@ export default class ProjectShowService{
             name: project.name,
             navers: projectNaver
         }
+
         return showProject;
     }
 }
