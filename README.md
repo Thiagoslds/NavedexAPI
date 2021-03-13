@@ -3,6 +3,7 @@ Repositório para a API Navedex. Cadastro com email e senha para acessar e modif
 
 # Tecnologias
 * Typescript
+* Express
 * Postgres
 * Typeorm
 * Docker
